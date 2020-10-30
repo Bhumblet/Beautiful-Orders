@@ -47,10 +47,10 @@ int main () {
     Read_Customer_Orders_File(names, orders, prices, &number_of_customers, &number_of_items, customer_orders_filename);
     Print_Variables(names, orders, prices, &number_of_customers, &number_of_items, costs, percents, customer_orders_filename);
 
-    /*Format_Case_Of_Names(names, number_of_customers);
+    Format_Case_Of_Names(names, number_of_customers);
     Print_Variables(names, orders, prices, &number_of_customers, &number_of_items, costs, percents, customer_orders_filename);
 
-    Compute_Total_Cost_And_Percent(orders, prices, costs, percents, number_of_customers, number_of_items);
+    /*Compute_Total_Cost_And_Percent(orders, prices, costs, percents, number_of_customers, number_of_items);
     Print_Variables(names, orders, prices, &number_of_customers, &number_of_items, costs, percents, customer_orders_filename);
 
     Write_Formatted_Summary(names, costs, percents, number_of_customers, formatted_output_filename);*/
@@ -108,7 +108,34 @@ void Read_Customer_Orders_File(string names[MAX_NUMBER_OF_CUSTOMERS][2], int ord
     else cout<<"Unable to open file"<<endl;
 }
 
-void Format_Case_Of_Names(string names[MAX_NUMBER_OF_CUSTOMERS][2], const int number_of_customers) { }
+void Format_Case_Of_Names(string names[MAX_NUMBER_OF_CUSTOMERS][2], const int number_of_customers) {
+    for(int i = 0; i < number_of_customers; i++){
+        for(int n = 0; n < 2; n++){
+            string name = names[i][n];
+            string newName;
+            for(int j = 0; j < name.length(); j++){
+                int ch = int(name.at(j));
+                if(j == 0){
+                    if(ch < 123 && ch > 96){
+                        newName = char(ch - 32);
+                    }
+                    else{
+                        newName = char(ch);
+                    }
+                }
+                else{
+                    if(ch < 123 && ch > 96){
+                        newName += char(ch);
+                    }
+                    else{
+                        newName += char(ch + 32);
+                    }
+                }
+            }
+            names[i][n] = newName;
+        }
+    }
+}
 
 void Compute_Total_Cost_And_Percent(int orders[MAX_NUMBER_OF_CUSTOMERS][MAX_NUMBER_OF_ITEM_TYPES], double prices[MAX_NUMBER_OF_ITEM_TYPES], double costs[], double percents[], int number_of_customers, int number_of_items) { }
 
