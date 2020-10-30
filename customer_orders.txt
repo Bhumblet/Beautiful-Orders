@@ -1,0 +1,13 @@
+number_of_customers 10
+number_of_items 4
+customer_id first_name last_name 1.99 5.99 10.00 20.00
+00001 JOSE Jones 5 10 10 20
+08000 Melinda Gates 0 0 0 1000
+12345 Selena Quintanilla 1 1 1 1
+00020 Zhang SAI 0 0 0 1
+00060 ANNE KHAN 1 1 1 1
+00300 malek smith 6 11 11 21
+00040 omar CASTRO 1 0 11 0
+00005 Anne Wei 0 1 0 100
+00700 miguel Abara 10 10 10 100
+90210 Kanye West 10 1 1 1
