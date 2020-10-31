@@ -61,7 +61,6 @@ int main () {
 void Read_Customer_Orders_File(string names[MAX_NUMBER_OF_CUSTOMERS][2], int orders[MAX_NUMBER_OF_CUSTOMERS][MAX_NUMBER_OF_ITEM_TYPES], double prices[MAX_NUMBER_OF_ITEM_TYPES], int *number_of_customers, int *number_of_items, const string input_filename) {
     string line;
     ifstream input(input_filename);
-    cout<<input_filename<<endl;
     int customerNumber = 0;
     if(input.is_open()){
         while(getline(input,line)){
@@ -113,7 +112,7 @@ void Format_Case_Of_Names(string names[MAX_NUMBER_OF_CUSTOMERS][2], const int nu
         for(int n = 0; n < 2; n++){
             string name = names[i][n];
             string newName;
-            for(int j = 0; j < name.length(); j++){
+            for(int j = 0; j < (int) name.length(); j++){
                 int ch = int(name.at(j));
                 if(j == 0){
                     if(ch < 123 && ch > 96){
