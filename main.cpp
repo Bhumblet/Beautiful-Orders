@@ -50,10 +50,10 @@ int main () {
     Format_Case_Of_Names(names, number_of_customers);
     Print_Variables(names, orders, prices, &number_of_customers, &number_of_items, costs, percents, customer_orders_filename);
 
-    /*Compute_Total_Cost_And_Percent(orders, prices, costs, percents, number_of_customers, number_of_items);
+    Compute_Total_Cost_And_Percent(orders, prices, costs, percents, number_of_customers, number_of_items);
     Print_Variables(names, orders, prices, &number_of_customers, &number_of_items, costs, percents, customer_orders_filename);
 
-    Write_Formatted_Summary(names, costs, percents, number_of_customers, formatted_output_filename);*/
+    Write_Formatted_Summary(names, costs, percents, number_of_customers, formatted_output_filename);
 
     return 0;
 }
@@ -137,9 +137,32 @@ void Format_Case_Of_Names(string names[MAX_NUMBER_OF_CUSTOMERS][2], const int nu
     }
 }
 
-void Compute_Total_Cost_And_Percent(int orders[MAX_NUMBER_OF_CUSTOMERS][MAX_NUMBER_OF_ITEM_TYPES], double prices[MAX_NUMBER_OF_ITEM_TYPES], double costs[], double percents[], int number_of_customers, int number_of_items) { }
+void Compute_Total_Cost_And_Percent(int orders[MAX_NUMBER_OF_CUSTOMERS][MAX_NUMBER_OF_ITEM_TYPES], double prices[MAX_NUMBER_OF_ITEM_TYPES], double costs[], double percents[], int number_of_customers, int number_of_items) {
+    for(int i = 0; i < number_of_customers; i++){
+        double cost = 0;
+        for(int n = 0; n < number_of_items; n++){
+            cost += (orders[i][n] * prices[n]);
+        }
+        costs[i] = cost;
+    }
+    double total = 0;
+    for(int i = 0; i < number_of_customers; i++){
+        total += double(costs[i]);
+    }
+    for(int i = 0; i < number_of_customers; i++){
+        percents[i] = (double)100 * (costs[i]/total);
+    }
+}
 
-void Write_Formatted_Summary(string names[MAX_NUMBER_OF_CUSTOMERS][2], double costs[], double percents[], int number_of_customers, string output_filename) { }
+void Write_Formatted_Summary(string names[MAX_NUMBER_OF_CUSTOMERS][2], double costs[], double percents[], int number_of_customers, string output_filename) {
+    ofstream output(output_filename);
+    if(output.is_open()){
+        for(int i = 0; i < number_of_customers; i++){
+           output<<names[i][1]<<", "<<setw(23 - names[i][1].length())<<left<<names[i][0]<<fixed<<setprecision(2)<<setw(15)<<right<<costs[i]<<setprecision(1)<<setw(20)<<percents[i]<<"\n";
+        }
+        output.close();
+    }
+}
 
 
 // THIS IS A UTILITY FUNCTION USED FOR TESTING. DO NOT MODIFY.
